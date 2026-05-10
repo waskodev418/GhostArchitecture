@@ -57,7 +57,7 @@ Result getRotateKet(){
     };
     
     int offset = key3[5] % 22;
-    int lenght = key2[-1] % 22 + 20
+    int lenght = key2[-1] % 22 + 20;
     var reverse_key = prk.getSubstring( offset, lenght );
     
     int lifespan = Integer.parse(key2[ key1[-1] % key2.size() ] + key3[ key1[-2] % key3.size() ]);
