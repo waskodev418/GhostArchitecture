@@ -42,6 +42,38 @@ To blind attackers, the **Data Server** eschews standard success/failure indicat
 
 ## Data Flow
 
+### Deterministic key generation
+The following algorithm is written in a personal psudocode. It's goal is to just show how to generate - in a deterministic way - a new key.
+
+``` java
+Result getRotateKet(){
+
+    int reminder = root[0] % 3;
+    var prk = switch(reminder){
+        // it hashes arg1 with arg2, arg3 with arg4 and then hashes the two results
+        0 => hmacSha256(key1, key2, key3, root)
+        1 => hmacSha256(key3, root, key2 , key1)
+        2 => hmacSha256(key2, key1, root, key3)
+    };
+    
+    int offset = key3[5] % 22;
+    int lenght = key2[-1] % 22 + 20;
+    var reverse_key = prk.getSubstring( offset, lenght );
+    
+    int lifespan = Integer.parse(key2[ key1[-1] % key2.size() ] + key3[ key1[-2] % key3.size() ]);
+    lifespan = max(60, lifespan);
+    
+    root = (root[-1] % 2 == 0) :
+    hmacSha256(root, key3) ? hmacSha256(key3, root);
+    
+    key3 = key2;
+    key2 = key1;
+    key1 = reverse_key.reverse();
+    
+    return {key1, lifespan};
+} 
+```
+
 ### Non-Idempotent Operations
 
 1. The Client sends its data via a `solicit` message to the **Web Server**:
@@ -99,10 +131,13 @@ the eventual exception coming from a **reply attack**.
       "result": "[the result of the operation encrypted with the client key]"
 }
 ```
+---
 
 ## Vulnerabilities
 As of today 10/05/2026, the only vulnerability discovered lies in the moment when a client requests the main page from the Web server: it has to send its client id over the internet alone.
-Yet, in practice this is easly solved with the use of `TLS` for this very first message exchange: much like `WS` protocol does with HTTP.
+Yet, in practice this is easly solved with the use of `TLS` for this very first message exchange.
+
+---
 
 ## Perfomance enhancements
 The following list contains simple - yet effective - features to implement in order to increase the overall throughput of the architecture - and, in some cases, its footprint.
@@ -110,3 +145,8 @@ The following list contains simple - yet effective - features to implement in or
 - **Dispatcher tier**: a simple proxy-like element whose role is to route the `token` messages, coming from the Web server, direcly to the Data server - if the client is further away in space.
 
 - **FPGAs or ASICs**: implement the whole encryption/decryption layer at the hardware level to free up CPU time and optimize the speed of the system. Perhaps this can also make the keys even more secure as they would live only at the circuit level.
+
+---
+
+## Migration
+In GhostArchitecture, Data Servers are disposable commodities. Because security is anchored in the Client's Key and the Web Server's Pulse, data is location-agnostic. This enables 'Follow-the-Sun' migration and Multi-Node Sharding, where a single account's data can be distributed across various servers and moved at the user's discretion. The user can physically 'pull' their data to a local node for speed or 'push' it to a specific jurisdiction for privacy — all without the infrastructure ever seeing the raw content.
