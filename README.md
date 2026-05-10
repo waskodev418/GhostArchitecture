@@ -102,7 +102,7 @@ the eventual exception coming from a **reply attack**.
 
 ## Vulnerabilities
 As of today 10/05/2026, the only vulnerability discovered lies in the moment when a client requests the main page from the Web server: it has to send its client id over the internet alone.
-Yet, in practice this is easly solved with the use of `TLS` for this very first message exchange: much like `WS` protocol does with HTTP.
+Yet, in practice this is easly solved with the use of `TLS` for this very first message exchange.
 
 ## Perfomance enhancements
 The following list contains simple - yet effective - features to implement in order to increase the overall throughput of the architecture - and, in some cases, its footprint.
