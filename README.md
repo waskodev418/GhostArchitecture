@@ -16,9 +16,10 @@ By utilizing **Temporal Key Shifting (The Pulse)** and symmetric tokens, the sys
 The client is an active cryptographic participant. It performs "Inner Box" encryption using an ephemeral key ($K_{client}$). This ensures that sensitive data remains opaque during transit, even if the "Outer Box" (transport layer) is stripped or inspected by the Relay.
 
 ### 4. Privacy-by-Design
-The architecture enforces "Information Zero" for all intermediaries:
+Only the architecture as a whole knows the truth, but no individual component possesses that knoledge. Here some example:
 - **The Web Server** possesses zero knowledge of the payload's intent.
 - **The Network** gains zero knowledge of transaction outcomes. All responses - whether Success, Failure, or Replay - are masked identically with constant-length, high-entropy payloads.
+
 
 ### 5. Role-Based Isolation
 Each node within the architecture is specialized to perform a single set of operations and output a result. This modularity facilitates easy network expansion: neither servers nor clients need to track the identity of their interlocutors, provided the messages are cryptographically valid.
