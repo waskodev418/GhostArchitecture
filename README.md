@@ -15,9 +15,9 @@ By utilizing **Temporal Key Shifting (The Pulse)** and symmetric tokens, the sys
 ### 3. Thick Client
 The client is an active cryptographic participant. It performs "Inner Box" encryption using an ephemeral key ($K_{client}$). This ensures that sensitive data remains opaque during transit, even if the "Outer Box" (transport layer) is stripped or inspected by the Relay.
 
-### 4. Zero-Knowledge
+### 4. Privacy-by-Design
 The architecture enforces "Information Zero" for all intermediaries:
-- **The Relay (Web Server)** possesses zero knowledge of the payload's intent.
+- **The Web Server** possesses zero knowledge of the payload's intent.
 - **The Network** gains zero knowledge of transaction outcomes. All responses - whether Success, Failure, or Replay - are masked identically with constant-length, high-entropy payloads.
 
 ### 5. Role-Based Isolation
