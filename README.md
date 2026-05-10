@@ -50,7 +50,7 @@ Result getRotateKet(){
 
     int reminder = root[0] % 3;
     var prk = switch(reminder){
-        // it hashes arg1 with arg2, arg3 with arg4 and the hashes the two results
+        // it hashes arg1 with arg2, arg3 with arg4 and then hashes the two results
         0 => hmacSha256(key1, key2, key3, root)
         1 => hmacSha256(key3, root, key2 , key1)
         2 => hmacSha256(key2, key1, root, key3)
