@@ -74,6 +74,8 @@ Result getRotateKet(){
     return {key1, lifespan};
 } 
 ```
+The system utilizes a sliding-window synchronization where the key-rotation cadence is self-correcting based on the key involved in the successful decryption:
+if the server decrypted the message using the second key then it will count a few seconds more before generating the next pulse.
 
 ### Non-Idempotent Operations
 
