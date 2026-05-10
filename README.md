@@ -99,6 +99,7 @@ the eventual exception coming from a **reply attack**.
       "result": "[the result of the operation encrypted with the client key]"
 }
 ```
+---
 
 ## Vulnerabilities
 As of today 10/05/2026, the only vulnerability discovered lies in the moment when a client requests the main page from the Web server: it has to send its client id over the internet alone.
@@ -110,3 +111,8 @@ The following list contains simple - yet effective - features to implement in or
 - **Dispatcher tier**: a simple proxy-like element whose role is to route the `token` messages, coming from the Web server, direcly to the Data server - if the client is further away in space.
 
 - **FPGAs or ASICs**: implement the whole encryption/decryption layer at the hardware level to free up CPU time and optimize the speed of the system. Perhaps this can also make the keys even more secure as they would live only at the circuit level.
+
+---
+
+## Migration
+In GhostArchitecture, Data Servers are disposable commodities. Because security is anchored in the Client's Key and the Web Server's Pulse, data is location-agnostic. This enables 'Follow-the-Sun' migration and Multi-Node Sharding, where a single account's data can be distributed across various servers and moved at the user's discretion. The user can physically 'pull' their data to a local node for speed or 'push' it to a specific jurisdiction for privacy — all without the infrastructure ever seeing the raw content.
