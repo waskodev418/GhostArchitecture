@@ -1,6 +1,6 @@
 # GhostArchitecture 
 Note: this file contains some specifics of the architecture while the folders contains a simple - hopeful effective - `proof of concept`.
-
+Disclaimer: The original development was carried out across multiple repositories on my institutional (school) account. This version has been refactored and centralized to facilitate peer review and demonstrate the architecture's core pillars in a single, cohesive environment.
 ## Core Pillars
 
 ### 1. Distributed
